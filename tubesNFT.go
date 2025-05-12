@@ -2,11 +2,15 @@ package main
 
 import "fmt"
 
+type nft struct {
+	judulAset, namaCreator, blockChain, status string
+	tanggalBeli, nilai                         int
+}
+
 func main() {
 	var opsi int
 	menuAwal()
 	opsi = pilihOpsi(opsi)
-	fmt.Print("test")
 }
 
 func menuAwal() {
@@ -26,4 +30,8 @@ func pilihOpsi(opsi int) int {
 	fmt.Scan(&opsi)
 	fmt.Println("------------------------------------")
 	return opsi
+}
+
+func tambahAset() {
+
 }
