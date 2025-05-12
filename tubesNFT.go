@@ -23,5 +23,6 @@ func menuAwal() {
 func pilihOpsi(opsi int) int {
 	fmt.Print("   Silahkan pilih opsi: ")
 	fmt.Scan(&opsi)
+	fmt.Println("------------------------------------")
 	return opsi
 }
