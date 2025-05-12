@@ -6,6 +6,7 @@ func main() {
 	var opsi int
 	menuAwal()
 	opsi = pilihOpsi(opsi)
+	fmt.Print("test")
 }
 
 func menuAwal() {
