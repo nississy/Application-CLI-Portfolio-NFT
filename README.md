@@ -5,7 +5,7 @@
 ## About this project
 Project ini dibuat secara berkelompok (2 anggota), guna untuk memenuhi tugas besar mata kuliah Algoritma Pemrograman 2, yang di mana project ini juga membantu kami memahami struktur fundamental pengunaan dalam ```GO```, seperti penerapan function, prosedur, arrays, searching, dan sorting dalam sebuah program.
 
-### Project ini dibuat seluruhnya dengan GOLANG (GO Language)
+(Project ini dibuat seluruhnya dengan GO Language)
 
 
 
