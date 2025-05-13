@@ -3,9 +3,13 @@ package main
 import "fmt"
 
 type nft struct {
-	judulAset, namaCreator, blockChain, status string
-	tanggalBeli, nilai                         int
+	judulAset, namaCreator, blockChain, status, rarity string
+	tanggalBeli                                        int
+	nilai                                              float64
 }
+
+var koleksi [1000]nft
+var jumlahData int
 
 func main() {
 	var opsi int
@@ -33,8 +37,36 @@ func pilihOpsi(opsi int) int {
 }
 
 func tambahAset() {
+	var judul, creator, chain, status string
+	var tanggal int
+	var nilai float64
 
+	fmt.Print("Masukkan judul aset: ")
+	fmt.Scan(&judul)
+	fmt.Print("Masukkan nama creator: ")
+	fmt.Scan(&creator)
+	fmt.Print("Masukkan blockchain: ")
+	fmt.Scan(&chain)
+	fmt.Print("Masukkan status (terjual/belum): ")
+	fmt.Scan(&status)
+	fmt.Print("Masukkan tanggal beli (misal 20250101): ")
+	fmt.Scan(&tanggal)
+	fmt.Print("Masukkan nilai aset (IDR): ")
+	fmt.Scan(&nilai)
+
+	koleksi[jumlahData].judulAset = judul
+	koleksi[jumlahData].namaCreator = creator
+	koleksi[jumlahData].blockChain = chain
+	koleksi[jumlahData].status = status
+	koleksi[jumlahData].tanggalBeli = tanggal
+	koleksi[jumlahData].nilai = nilai
+	koleksi[jumlahData].rarity = tentukanRarity(nilai)
+
+	jumlahData++
+
+	fmt.Println("Aset berhasil ditambahkan!\n")
 }
+
 func tentukanRarity(nilai float64) string {
 	if nilai > 15000000 {
 		return "Legendary"
