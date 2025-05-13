@@ -35,3 +35,14 @@ func pilihOpsi(opsi int) int {
 func tambahAset() {
 
 }
+func tentukanRarity(nilai float64) string {
+	if nilai > 15000000 {
+		return "Legendary"
+	} else if nilai >= 1000000 {
+		return "Epic"
+	} else if nilai >= 100000 {
+		return "Rare"
+	} else {
+		return "Common"
+	}
+}
