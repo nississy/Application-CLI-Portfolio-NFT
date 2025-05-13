@@ -13,8 +13,14 @@ var jumlahData int
 
 func main() {
 	var opsi int
-	menuAwal()
-	opsi = pilihOpsi(opsi)
+	for opsi != 5 {
+		menuAwal()
+		opsi = pilihOpsi(opsi)
+
+		if opsi == 1 {
+			tambahAset()
+		}
+	}
 }
 
 func menuAwal() {
@@ -49,7 +55,7 @@ func tambahAset() {
 	fmt.Scan(&chain)
 	fmt.Print("Masukkan status (terjual/belum): ")
 	fmt.Scan(&status)
-	fmt.Print("Masukkan tanggal beli (misal 20250101): ")
+	fmt.Print("Masukkan tanggal beli: ")
 	fmt.Scan(&tanggal)
 	fmt.Print("Masukkan nilai aset (IDR): ")
 	fmt.Scan(&nilai)
