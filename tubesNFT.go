@@ -102,7 +102,7 @@ func lihatAsetList(koleksiNFT koleksi) {
 		fmt.Println("List Aset yang anda miliki saat ini:")
 		for i = 0; i < jumlahData; i++ {
 			fmt.Println("====================================")
-			fmt.Printf("Judul Aset: %s\n", koleksiNFT[i].judulAset)
+			fmt.Printf("Judul Aset  : %s\n", koleksiNFT[i].judulAset)
 			fmt.Printf("Creator     : %s\n", koleksiNFT[i].namaCreator)
 			fmt.Printf("Blockchain  : %s\n", koleksiNFT[i].blockChain)
 			fmt.Printf("Status      : %s\n", koleksiNFT[i].status)
