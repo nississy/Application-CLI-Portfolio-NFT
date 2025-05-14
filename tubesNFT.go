@@ -8,17 +8,26 @@ type nft struct {
 	nilai                                              float64
 }
 
-var koleksi [1000]nft
+type koleksi [1000]nft
+
 var jumlahData int
 
 func main() {
+	var koleksiNFT koleksi
 	var opsi int
 	for opsi != 5 {
 		menuAwal()
 		opsi = pilihOpsi(opsi)
 
-		if opsi == 1 {
-			tambahAset()
+		switch opsi {
+		case 1:
+			tambahAset(&koleksiNFT)
+		case 2:
+			lihatAsetList(koleksiNFT)
+		case 5:
+			fmt.Println("Terima kasih telah menggunakan aplikasi. Selamat jumpa kembali!")
+		default:
+			fmt.Println("Opsi tidak valid.")
 		}
 	}
 }
@@ -42,41 +51,35 @@ func pilihOpsi(opsi int) int {
 	return opsi
 }
 
-func tambahAset() {
-	var judul, creator, chain, status string
-	var tanggal int
-	var nilai float64
+func tambahAset(koleksiNFT *koleksi) {
+	if jumlahData >= len(*koleksiNFT) {
+		fmt.Println("Koleksi sudah penuh!")
+	}
 
 	fmt.Println("Masukkan judul aset")
 	fmt.Print(">> ")
-	fmt.Scan(&judul)
+	fmt.Scan(&koleksiNFT[jumlahData].judulAset)
 	fmt.Println("Masukkan nama creator")
 	fmt.Print(">> ")
-	fmt.Scan(&creator)
+	fmt.Scan(&koleksiNFT[jumlahData].namaCreator)
 	fmt.Println("Masukkan blockchain")
 	fmt.Print(">> ")
-	fmt.Scan(&chain)
+	fmt.Scan(&koleksiNFT[jumlahData].blockChain)
 	fmt.Println("Masukkan status (terjual/belum)")
 	fmt.Print(">> ")
-	fmt.Scan(&status)
+	fmt.Scan(&koleksiNFT[jumlahData].status)
 	fmt.Println("Masukkan tanggal beli")
 	fmt.Print(">> ")
-	fmt.Scan(&tanggal)
+	fmt.Scan(&koleksiNFT[jumlahData].tanggalBeli)
 	fmt.Println("Masukkan nilai aset (IDR)")
 	fmt.Print(">> ")
-	fmt.Scan(&nilai)
+	fmt.Scan(&koleksiNFT[jumlahData].nilai)
 
-	koleksi[jumlahData].judulAset = judul
-	koleksi[jumlahData].namaCreator = creator
-	koleksi[jumlahData].blockChain = chain
-	koleksi[jumlahData].status = status
-	koleksi[jumlahData].tanggalBeli = tanggal
-	koleksi[jumlahData].nilai = nilai
-	koleksi[jumlahData].rarity = tentukanRarity(nilai)
+	koleksiNFT[jumlahData].rarity = tentukanRarity(koleksiNFT[jumlahData].nilai)
 
 	jumlahData++
 
-	fmt.Println("Aset berhasil ditambahkan!\n")
+	fmt.Println("Aset berhasil ditambahkan!")
 }
 
 func tentukanRarity(nilai float64) string {
@@ -88,5 +91,25 @@ func tentukanRarity(nilai float64) string {
 		return "Rare"
 	} else {
 		return "Common"
+	}
+}
+
+func lihatAsetList(koleksiNFT koleksi) {
+	var i int
+	if jumlahData == 0 {
+		fmt.Println("Belum ada aset dalam koleksi.")
+	} else {
+		fmt.Println("List Aset yang anda miliki saat ini:")
+		for i = 0; i < jumlahData; i++ {
+			fmt.Println("====================================")
+			fmt.Printf("Judul Aset: %s\n", koleksiNFT[i].judulAset)
+			fmt.Printf("Creator     : %s\n", koleksiNFT[i].namaCreator)
+			fmt.Printf("Blockchain  : %s\n", koleksiNFT[i].blockChain)
+			fmt.Printf("Status      : %s\n", koleksiNFT[i].status)
+			fmt.Printf("Tanggal Beli: %d\n", koleksiNFT[i].tanggalBeli)
+			fmt.Printf("Nilai       : Rp %.2f\n", koleksiNFT[i].nilai)
+			fmt.Printf("Rarity      : %s\n", koleksiNFT[i].rarity)
+		}
+		fmt.Println("====================================")
 	}
 }
