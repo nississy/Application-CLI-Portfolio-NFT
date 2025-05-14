@@ -47,17 +47,23 @@ func tambahAset() {
 	var tanggal int
 	var nilai float64
 
-	fmt.Print("Masukkan judul aset: ")
+	fmt.Println("Masukkan judul aset")
+	fmt.Print(">> ")
 	fmt.Scan(&judul)
-	fmt.Print("Masukkan nama creator: ")
+	fmt.Println("Masukkan nama creator")
+	fmt.Print(">> ")
 	fmt.Scan(&creator)
-	fmt.Print("Masukkan blockchain: ")
+	fmt.Println("Masukkan blockchain")
+	fmt.Print(">> ")
 	fmt.Scan(&chain)
-	fmt.Print("Masukkan status (terjual/belum): ")
+	fmt.Println("Masukkan status (terjual/belum)")
+	fmt.Print(">> ")
 	fmt.Scan(&status)
-	fmt.Print("Masukkan tanggal beli: ")
+	fmt.Println("Masukkan tanggal beli")
+	fmt.Print(">> ")
 	fmt.Scan(&tanggal)
-	fmt.Print("Masukkan nilai aset (IDR): ")
+	fmt.Println("Masukkan nilai aset (IDR)")
+	fmt.Print(">> ")
 	fmt.Scan(&nilai)
 
 	koleksi[jumlahData].judulAset = judul
