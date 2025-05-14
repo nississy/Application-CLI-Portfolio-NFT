@@ -14,6 +14,7 @@ var jumlahData int
 
 func main() {
 	var koleksiNFT koleksi
+	var totalNilaiAset float64
 	var opsi int
 	for opsi != 5 {
 		menuAwal()
@@ -24,10 +25,12 @@ func main() {
 			tambahAset(&koleksiNFT)
 		case 2:
 			lihatAsetList(koleksiNFT)
+		case 3:
+			lihatTotalAset(koleksiNFT, &totalNilaiAset)
 		case 5:
 			fmt.Println("Terima kasih telah menggunakan aplikasi. Selamat jumpa kembali!")
 		default:
-			fmt.Println("Opsi tidak valid.")
+			fmt.Println("Opsi tidak valid. Silahkan input ulang lagi.")
 		}
 	}
 }
@@ -56,23 +59,17 @@ func tambahAset(koleksiNFT *koleksi) {
 		fmt.Println("Koleksi sudah penuh!")
 	}
 
-	fmt.Println("Masukkan judul aset")
-	fmt.Print(">> ")
+	fmt.Print("Masukkan judul aset: ")
 	fmt.Scan(&koleksiNFT[jumlahData].judulAset)
-	fmt.Println("Masukkan nama creator")
-	fmt.Print(">> ")
+	fmt.Print("Masukkan nama creator: ")
 	fmt.Scan(&koleksiNFT[jumlahData].namaCreator)
-	fmt.Println("Masukkan blockchain")
-	fmt.Print(">> ")
+	fmt.Print("Masukkan blockchain: ")
 	fmt.Scan(&koleksiNFT[jumlahData].blockChain)
-	fmt.Println("Masukkan status (terjual/belum)")
-	fmt.Print(">> ")
+	fmt.Print("Masukkan status (terjual/belum): ")
 	fmt.Scan(&koleksiNFT[jumlahData].status)
-	fmt.Println("Masukkan tanggal beli")
-	fmt.Print(">> ")
+	fmt.Print("Masukkan tanggal beli: ")
 	fmt.Scan(&koleksiNFT[jumlahData].tanggalBeli)
-	fmt.Println("Masukkan nilai aset (IDR)")
-	fmt.Print(">> ")
+	fmt.Print("Masukkan nilai aset (IDR): Rp.")
 	fmt.Scan(&koleksiNFT[jumlahData].nilai)
 
 	koleksiNFT[jumlahData].rarity = tentukanRarity(koleksiNFT[jumlahData].nilai)
@@ -97,8 +94,10 @@ func tentukanRarity(nilai float64) string {
 func lihatAsetList(koleksiNFT koleksi) {
 	var i int
 	if jumlahData == 0 {
-		fmt.Println("Belum ada aset dalam koleksi.")
+		fmt.Println("Maaf anda belum memiliki aset dalam koleksi.")
+		fmt.Println("Silahkan tambahkan aset terlebih dahulu!")
 	} else {
+		fmt.Println("====================================")
 		fmt.Println("List Aset yang anda miliki saat ini:")
 		for i = 0; i < jumlahData; i++ {
 			fmt.Println("====================================")
@@ -110,6 +109,19 @@ func lihatAsetList(koleksiNFT koleksi) {
 			fmt.Printf("Nilai       : Rp %.2f\n", koleksiNFT[i].nilai)
 			fmt.Printf("Rarity      : %s\n", koleksiNFT[i].rarity)
 		}
-		fmt.Println("====================================")
+	}
+}
+
+func lihatTotalAset(koleksiNFT koleksi, totalNilaiAset *float64) {
+	var i int
+	if jumlahData == 0 {
+		fmt.Println("Maaf anda belum memiliki aset dalam koleksi.")
+		fmt.Println("Silahkan tambahkan aset terlebih dahulu!")
+	} else {
+		for i = 0; i < jumlahData; i++ {
+			*totalNilaiAset = *totalNilaiAset + koleksiNFT[i].nilai
+		}
+		fmt.Printf("Total aset dalam koleksi: %d\n", jumlahData)
+		fmt.Printf("Value: %f\n", *totalNilaiAset)
 	}
 }
