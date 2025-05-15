@@ -3,9 +3,8 @@ package main
 import "fmt"
 
 type nft struct {
-	judulAset, namaCreator, blockChain, status, rarity string
-	tanggalBeli                                        int
-	nilai                                              float64
+	judulAset, namaCreator, blockChain, status, rarity, tanggalBeli string
+	nilai                                                           float64
 }
 
 type koleksi [1000]nft
@@ -27,10 +26,12 @@ func main() {
 			lihatAsetList(koleksiNFT)
 		case 3:
 			lihatTotalAset(koleksiNFT, &totalNilaiAset)
+		case 4:
+			hapusAset(&koleksiNFT)
 		case 5:
-			fmt.Println("Terima kasih telah menggunakan aplikasi. Selamat jumpa kembali!")
+			fmt.Println("   Terima kasih telah menggunakan aplikasi. Sampai jumpa kembali!")
 		default:
-			fmt.Println("Opsi tidak valid. Silahkan input ulang lagi.")
+			fmt.Println("   Opsi tidak valid. Silahkan input ulang lagi.")
 		}
 	}
 }
@@ -67,7 +68,7 @@ func tambahAset(koleksiNFT *koleksi) {
 	fmt.Scan(&koleksiNFT[jumlahData].blockChain)
 	fmt.Print("Masukkan status (terjual/belum): ")
 	fmt.Scan(&koleksiNFT[jumlahData].status)
-	fmt.Print("Masukkan tanggal beli: ")
+	fmt.Print("Masukkan tanggal beli (dd-mm-yyyy): ")
 	fmt.Scan(&koleksiNFT[jumlahData].tanggalBeli)
 	fmt.Print("Masukkan nilai aset (IDR): Rp.")
 	fmt.Scan(&koleksiNFT[jumlahData].nilai)
@@ -105,7 +106,7 @@ func lihatAsetList(koleksiNFT koleksi) {
 			fmt.Printf("Creator     : %s\n", koleksiNFT[i].namaCreator)
 			fmt.Printf("Blockchain  : %s\n", koleksiNFT[i].blockChain)
 			fmt.Printf("Status      : %s\n", koleksiNFT[i].status)
-			fmt.Printf("Tanggal Beli: %d\n", koleksiNFT[i].tanggalBeli)
+			fmt.Printf("Tanggal Beli: %s\n", koleksiNFT[i].tanggalBeli)
 			fmt.Printf("Nilai       : Rp %.2f\n", koleksiNFT[i].nilai)
 			fmt.Printf("Rarity      : %s\n", koleksiNFT[i].rarity)
 		}
@@ -123,5 +124,38 @@ func lihatTotalAset(koleksiNFT koleksi, totalNilaiAset *float64) {
 		}
 		fmt.Printf("Total aset dalam koleksi: %d\n", jumlahData)
 		fmt.Printf("Value: %f\n", *totalNilaiAset)
+	}
+}
+
+func hapusAset(koleksiNFT *koleksi) {
+	var judulCari string
+	var index, i int
+	var ditemukan bool 
+	
+	ditemukan = false
+
+	fmt.Print("Masukkan judul aset yang ingin dihapus: ")
+	fmt.Scan(&judulCari)
+
+	if jumlahData == 0 {
+		fmt.Println("Maaf anda belum memiliki aset dalam koleksi.")
+		fmt.Println("Silahkan tambahkan aset terlebih dahulu!")
+	} else {
+		for i = 0; i < jumlahData; i++ {
+			if koleksiNFT[i].judulAset == judulCari {
+				index = i
+				ditemukan = true
+			}
+		}
+
+		if ditemukan {
+			for i = index; i < jumlahData-1; i++ {
+				koleksiNFT[i] = koleksiNFT[i+1]
+			}
+			jumlahData--
+			fmt.Println("Aset berhasil dihapus!")
+		} else {
+			fmt.Println("Aset tidak ditemukan!")
+		}
 	}
 }
