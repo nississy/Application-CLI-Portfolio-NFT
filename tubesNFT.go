@@ -2,12 +2,14 @@ package main
 
 import "fmt"
 
+const NMAX int = 1000
+
 type nft struct {
 	judulAset, namaCreator, blockChain, status, rarity, tanggalBeli string
 	nilai                                                           float64
 }
 
-type koleksi [1000]nft
+type koleksi [NMAX - 1]nft
 
 var jumlahData int
 
