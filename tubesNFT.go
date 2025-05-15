@@ -40,7 +40,7 @@ func menuAwal() {
 	fmt.Println("====================================")
 	fmt.Println("   [ Aplikasi CLI Portfolio NFT ]   ")
 	fmt.Println("====================================")
-	fmt.Println("   1. Tambah Aset CFT")
+	fmt.Println("   1. Tambah Aset NFT")
 	fmt.Println("   2. Lihat Aset")
 	fmt.Println("   3. Lihat Total Aset")
 	fmt.Println("   4. Hapus aset")
@@ -130,8 +130,8 @@ func lihatTotalAset(koleksiNFT koleksi, totalNilaiAset *float64) {
 func hapusAset(koleksiNFT *koleksi) {
 	var judulCari string
 	var index, i int
-	var ditemukan bool 
-	
+	var ditemukan bool
+
 	ditemukan = false
 
 	fmt.Print("Masukkan judul aset yang ingin dihapus: ")
