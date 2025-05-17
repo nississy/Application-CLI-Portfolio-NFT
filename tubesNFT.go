@@ -32,6 +32,7 @@ func main() {
 			hapusAset(&koleksiNFT)
 		case 5:
 			SelectionSortDescending(&koleksiNFT, jumlahData)
+			lihatAsetList(koleksiNFT)
 		case 6:
 			fmt.Println("   Terima kasih telah menggunakan aplikasi. Sampai jumpa kembali!")
 		default:
