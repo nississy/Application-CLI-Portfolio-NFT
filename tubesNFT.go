@@ -48,8 +48,8 @@ func menuAwal() {
 	fmt.Println("   2. Lihat Aset")
 	fmt.Println("   3. Lihat Total Aset")
 	fmt.Println("   4. Hapus aset")
-	fmt.Println("   5. Keluar")
-	fmt.Println("   6. Urutkan Aset berdasarkan Nilai (Descending)")
+	fmt.Println("   5. Urutkan Aset berdasarkan Nilai (Descending)")
+	fmt.Println("   6. Keluar")
 	fmt.Println("------------------------------------")
 }
 
@@ -179,13 +179,12 @@ func SelectionSortDescending(koleksiNFT *koleksi, N int) {
 					idx = i
 				}
 			}
+			if idx != pass {
+				temp = koleksiNFT[pass]
+				koleksiNFT[pass] = koleksiNFT[idx]
+				koleksiNFT[idx] = temp
+			}
 		}
-		if idx != pass {
-			temp = koleksiNFT[pass]
-			koleksiNFT[pass] = koleksiNFT[idx]
-			koleksiNFT[idx] = temp
-		}
+		fmt.Println("Data berhasil diurutkan dari nilai terbesar ke terkecil (descending).")
 	}
-
-	fmt.Println("Data berhasil diurutkan dari nilai terbesar ke terkecil (descending).")
 }
