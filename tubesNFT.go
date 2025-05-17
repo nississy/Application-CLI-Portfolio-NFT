@@ -17,7 +17,7 @@ func main() {
 	var koleksiNFT koleksi
 	var totalNilaiAset float64
 	var opsi int
-	for opsi != 5 {
+	for opsi != 6 {
 		menuAwal()
 		opsi = pilihOpsi(opsi)
 
@@ -31,6 +31,8 @@ func main() {
 		case 4:
 			hapusAset(&koleksiNFT)
 		case 5:
+			SelectionSortDescending(&koleksiNFT, jumlahData)
+		case 6:
 			fmt.Println("   Terima kasih telah menggunakan aplikasi. Sampai jumpa kembali!")
 		default:
 			fmt.Println("   Opsi tidak valid. Silahkan input ulang lagi.")
@@ -47,6 +49,7 @@ func menuAwal() {
 	fmt.Println("   3. Lihat Total Aset")
 	fmt.Println("   4. Hapus aset")
 	fmt.Println("   5. Keluar")
+	fmt.Println("   6. Urutkan Aset berdasarkan Nilai (Descending)")
 	fmt.Println("------------------------------------")
 }
 
@@ -160,4 +163,29 @@ func hapusAset(koleksiNFT *koleksi) {
 			fmt.Println("Aset tidak ditemukan!")
 		}
 	}
+}
+
+func SelectionSortDescending(koleksiNFT *koleksi, N int) {
+	var i, idx, pass int
+	var temp nft
+
+	if N == 0 {
+		fmt.Println("Belum ada data untuk diurutkan. Tambahkan aset terlebih dahulu.")
+	} else {
+		for pass = 0; pass < N-1; pass++ {
+			idx = pass
+			for i = pass + 1; i < N; i++ {
+				if koleksiNFT[i].nilai > koleksiNFT[idx].nilai {
+					idx = i
+				}
+			}
+		}
+		if idx != pass {
+			temp = koleksiNFT[pass]
+			koleksiNFT[pass] = koleksiNFT[idx]
+			koleksiNFT[idx] = temp
+		}
+	}
+
+	fmt.Println("Data berhasil diurutkan dari nilai terbesar ke terkecil (descending).")
 }
