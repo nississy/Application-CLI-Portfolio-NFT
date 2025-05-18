@@ -34,7 +34,7 @@ func main() {
 			SelectionSortDescending(&koleksiNFT, jumlahData)
 			lihatAsetList(koleksiNFT)
 		case 6:
-			fmt.Println("   Terima kasih telah menggunakan aplikasi. Sampai jumpa kembali!")
+			fmt.Println("   Terima kasih telah menggunakan aplikasi ini. Sampai jumpa kembali!")
 		default:
 			fmt.Println("   Opsi tidak valid. Silahkan input ulang lagi.")
 		}
@@ -49,7 +49,7 @@ func menuAwal() {
 	fmt.Println("   2. Lihat Aset")
 	fmt.Println("   3. Lihat Total Aset")
 	fmt.Println("   4. Hapus aset")
-	fmt.Println("   5. Urutkan Aset berdasarkan Nilai (Descending)")
+	fmt.Println("   5. Urutan Aset dari yang paling mahal")
 	fmt.Println("   6. Keluar")
 	fmt.Println("------------------------------------")
 }
@@ -140,13 +140,13 @@ func hapusAset(koleksiNFT *koleksi) {
 
 	ditemukan = false
 
-	fmt.Print("Masukkan judul aset yang ingin dihapus: ")
-	fmt.Scan(&judulCari)
-
 	if jumlahData == 0 {
-		fmt.Println("Maaf anda belum memiliki aset dalam koleksi.")
+		fmt.Println("Maaf anda belum memiliki aset dalam koleksi untuk dihapus.")
 		fmt.Println("Silahkan tambahkan aset terlebih dahulu!")
 	} else {
+		fmt.Print("Masukkan judul aset yang ingin dihapus: ")
+		fmt.Scan(&judulCari)
+
 		for i = 0; i < jumlahData; i++ {
 			if koleksiNFT[i].judulAset == judulCari {
 				index = i
@@ -186,6 +186,6 @@ func SelectionSortDescending(koleksiNFT *koleksi, N int) {
 				koleksiNFT[idx] = temp
 			}
 		}
-		fmt.Println("Data berhasil diurutkan dari nilai terbesar ke terkecil (descending).")
+		fmt.Println("Urutan aset anda dari yang paling mahal")
 	}
 }
