@@ -5,8 +5,9 @@ import "fmt"
 const NMAX int = 1000
 
 type nft struct {
-	judulAset, namaCreator, blockChain, status, rarity, tanggalBeli string
-	nilai                                                           float64
+	judulAset, namaCreator, blockChain, status, rarity string
+	tanggalBeli                                        int
+	nilai                                              float64
 }
 
 type koleksi [NMAX - 1]nft
@@ -74,8 +75,12 @@ func tambahAset(koleksiNFT *koleksi) {
 	fmt.Scan(&koleksiNFT[jumlahData].blockChain)
 	fmt.Print("Masukkan status (terjual/belum): ")
 	fmt.Scan(&koleksiNFT[jumlahData].status)
-	fmt.Print("Masukkan tanggal beli (dd-mm-yyyy): ")
-	fmt.Scan(&koleksiNFT[jumlahData].tanggalBeli)
+
+	var hari, bulan, tahun int
+	fmt.Print("Masukkan tanggal beli (dd mm yyyy): ")
+	fmt.Scan(&hari, &bulan, &tahun)
+	koleksiNFT[jumlahData].tanggalBeli = tahun*10000 + bulan*100 + hari
+
 	fmt.Print("Masukkan nilai aset (IDR): Rp.")
 	fmt.Scan(&koleksiNFT[jumlahData].nilai)
 
@@ -112,8 +117,11 @@ func lihatAsetList(koleksiNFT koleksi) {
 			fmt.Printf("Creator     : %s\n", koleksiNFT[i].namaCreator)
 			fmt.Printf("Blockchain  : %s\n", koleksiNFT[i].blockChain)
 			fmt.Printf("Status      : %s\n", koleksiNFT[i].status)
-			fmt.Printf("Tanggal Beli: %s\n", koleksiNFT[i].tanggalBeli)
-			fmt.Printf("Nilai       : Rp %.2f\n", koleksiNFT[i].nilai)
+
+			t := koleksiNFT[i].tanggalBeli
+			fmt.Printf("Tanggal Beli: %02d-%02d-%04d\n", t%100, (t/100)%100, t/10000)
+
+			fmt.Printf("Nilai       : Rp. %.2f\n", koleksiNFT[i].nilai)
 			fmt.Printf("Rarity      : %s\n", koleksiNFT[i].rarity)
 		}
 	}
