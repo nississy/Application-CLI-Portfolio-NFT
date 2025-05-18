@@ -174,6 +174,7 @@ func hapusAset(koleksiNFT *koleksi) {
 	}
 }
 
+//Mengurutkan(Descending) berdasarkan nilai aset
 func SelectionSortDescending(koleksiNFT *koleksi, N int) {
 	var i, idx, pass int
 	var temp nft
@@ -195,5 +196,22 @@ func SelectionSortDescending(koleksiNFT *koleksi, N int) {
 			}
 		}
 		fmt.Println("Urutan aset anda dari yang paling mahal")
+	}
+}
+
+//Mengurutkan(Ascending) berdasarkan tanggal aset
+func InsertionSortAscending(koleksiNFT *koleksi, N int) {
+	var i, pass, temp int
+
+	pass = 1
+	for pass <= N-1 {
+		i = pass
+		temp = koleksiNFT[pass].tanggalBeli
+		for i > 0 && temp < koleksiNFT[i-1].tanggalBeli {
+			koleksiNFT[i] = koleksiNFT[i-1]
+			i = i - 1
+		}
+		koleksiNFT[i].tanggalBeli = temp
+		pass = pass + 1
 	}
 }
