@@ -120,7 +120,6 @@ func lihatAsetList(koleksiNFT koleksi) {
 		switch pilihan {
 		case 1:
 			SelectionSortNilaiDescending(&koleksiNFT, jumlahData)
-			fmt.Println("Aset diurutkan berdasarkan nilai termahal")
 			tampilanAset(koleksiNFT)
 		case 2:
 			InsertionSortTanggalAscending(&koleksiNFT, jumlahData)
@@ -236,7 +235,7 @@ func InsertionSortTanggalAscending(koleksiNFT *koleksi, N int) {
 	var temp nft
 
 	pass = 1
-	for pass < N-1 {
+	for pass < N {
 		i = pass
 		temp = koleksiNFT[pass]
 		for i > 0 && temp.tanggalBeli < koleksiNFT[i-1].tanggalBeli {
@@ -250,15 +249,15 @@ func InsertionSortTanggalAscending(koleksiNFT *koleksi, N int) {
 
 //Penerapan binary search untuk mencari data berdasarkan judul aset
 //Nilai diurutkan terlebih dahulu pakai insertion
-func InsertionSortJudulDescending(koleksiNFT *koleksi, N int) {
+func InsertionSortJudulAscending(koleksiNFT *koleksi, N int) {
 	var i, pass int
 	var temp nft
 
 	pass = 1
-	for pass < N-1 {
+	for pass < N {
 		i = pass
 		temp = koleksiNFT[pass]
-		for i > 0 && temp.judulAset > koleksiNFT[i-1].judulAset {
+		for i > 0 && temp.judulAset < koleksiNFT[i-1].judulAset {
 			koleksiNFT[i] = koleksiNFT[i-1]
 			i = i - 1
 		}
@@ -296,7 +295,7 @@ func cariAsetDenganJudulBinary(koleksiNFT koleksi, N int) {
 	fmt.Scan(&target)
 
 	// Urutkan terlebih dahulu berdasarkan judul
-	InsertionSortJudulDescending(&koleksiNFT, N)
+	InsertionSortJudulAscending(&koleksiNFT, N)
 
 	// Cari menggunakan binary search
 	pos = BinarySearchJudul(koleksiNFT, N, target)
