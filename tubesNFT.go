@@ -110,6 +110,8 @@ func lihatAsetList(koleksiNFT koleksi) {
 		fmt.Println("------------------------------------")
 		fmt.Println("   1. Tampilkan berdasarkan nilai (termahal ke termurah)")
 		fmt.Println("   2. Tampilkan berdasarkan tanggal beli (terlama ke terbaru)")
+		fmt.Println("   3. Tampilkan berdasarkan rarity")
+		fmt.Println("   4. Cari berdasarkan judul aset (binary search)")
 		fmt.Println("------------------------------------")
 		fmt.Print("Pilihan anda: ")
 		fmt.Scan(&pilihan)
@@ -129,6 +131,8 @@ func lihatAsetList(koleksiNFT koleksi) {
 			fmt.Print("Masukkan rarity yang ingin dicari (Common/Rare/Epic/Legendary): ")
 			fmt.Scan(&rarity)
 			cariAsetBerdasarkanRarity(koleksiNFT, rarity)
+		case 4:
+			cariAsetDenganJudulBinary(koleksiNFT, jumlahData)
 		default:
 			fmt.Println("Opsi tidak valid. Silahkan input ulang lagi.")
 		}
@@ -245,7 +249,75 @@ func InsertionSortTanggalAscending(koleksiNFT *koleksi, N int) {
 }
 
 //Penerapan binary search untuk mencari data berdasarkan judul aset
-func 
+//Nilai diurutkan terlebih dahulu pakai insertion
+func InsertionSortJudulDescending(koleksiNFT *koleksi, N int) {
+	var i, pass int
+	var temp nft
+
+	pass = 1
+	for pass < N-1 {
+		i = pass
+		temp = koleksiNFT[pass]
+		for i > 0 && temp.judulAset > koleksiNFT[i-1].judulAset {
+			koleksiNFT[i] = koleksiNFT[i-1]
+			i = i - 1
+		}
+		koleksiNFT[i] = temp
+		pass = pass + 1
+	}
+}
+
+func BinarySearchJudul(koleksiNFT koleksi, N int, target string) int {
+	var low, high, mid int
+	low = 0
+	high = N - 1
+	for low <= high {
+		mid = (low + high) / 2
+		if koleksiNFT[mid].judulAset == target {
+			return mid
+		} else if koleksiNFT[mid].judulAset < target {
+			low = mid + 1
+		} else {
+			high = mid - 1
+		}
+	}
+	return -1
+}
+
+func cariAsetDenganJudulBinary(koleksiNFT koleksi, N int) {
+	var pos int
+	if jumlahData == 0 {
+		fmt.Println("Belum ada aset dalam koleksi.")
+		return
+	}
+
+	var target string
+	fmt.Print("Masukkan judul aset yang ingin dicari: ")
+	fmt.Scan(&target)
+
+	// Urutkan terlebih dahulu berdasarkan judul
+	InsertionSortJudulDescending(&koleksiNFT, N)
+
+	// Cari menggunakan binary search
+	pos = BinarySearchJudul(koleksiNFT, N, target)
+	if pos == -1 {
+		fmt.Println("Aset dengan judul tersebut tidak ditemukan.")
+	} else {
+		fmt.Println("Aset ditemukan!")
+		fmt.Println("====================================")
+		fmt.Printf("Judul Aset  : %s\n", koleksiNFT[pos].judulAset)
+		fmt.Printf("Creator     : %s\n", koleksiNFT[pos].namaCreator)
+		fmt.Printf("Blockchain  : %s\n", koleksiNFT[pos].blockChain)
+		fmt.Printf("Status      : %s\n", koleksiNFT[pos].status)
+
+		t := koleksiNFT[pos].tanggalBeli
+		fmt.Printf("Tanggal Beli: %02d-%02d-%04d\n", t%100, (t/100)%100, t/10000)
+
+		fmt.Printf("Nilai       : Rp. %.2f\n", koleksiNFT[pos].nilai)
+		fmt.Printf("Rarity      : %s\n", koleksiNFT[pos].rarity)
+		fmt.Println("====================================")
+	}
+}
 
 //Penerapan linier search untuk list seluruh aset pada kasus rarity
 func cariAsetBerdasarkanRarity(koleksiNFT koleksi, rarity string) {
@@ -269,4 +341,3 @@ func cariAsetBerdasarkanRarity(koleksiNFT koleksi, rarity string) {
 		fmt.Printf("Tidak ditemukan aset dengan rarity: %s\n", rarity)
 	}
 }
-
