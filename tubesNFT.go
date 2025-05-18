@@ -100,8 +100,8 @@ func tentukanRarity(nilai float64) string {
 }
 
 func lihatAsetList(koleksiNFT koleksi) {
-	var i, pilihan int
-	var opsiList string
+	var pilihan int
+
 	if jumlahData == 0 {
 		fmt.Println("Maaf anda belum memiliki aset dalam koleksi.")
 		fmt.Println("Silahkan tambahkan aset terlebih dahulu!")
@@ -117,29 +117,33 @@ func lihatAsetList(koleksiNFT koleksi) {
 		switch pilihan {
 		case 1:
 			SelectionSortDescending(&koleksiNFT, jumlahData)
-			opsiList = "Aset diurutkan berdasarkan nilai termahal"
+			fmt.Println("Aset diurutkan berdasarkan nilai termahal")
+			tampilanAset(koleksiNFT)
 		case 2:
 			InsertionSortAscending(&koleksiNFT, jumlahData)
-			opsiList = "Aset diurutkan berdasarkan tanggal beli awal"
+			fmt.Println("Aset diurutkan berdasarkan tanggal beli awal")
+			tampilanAset(koleksiNFT)
 		default:
 			fmt.Println("Opsi tidak valid. Silahkan input ulang lagi.")
 		}
+	}
+}
 
+func tampilanAset(koleksiNFT koleksi) {
+	var i, t int
+
+	for i = 0; i < jumlahData; i++ {
 		fmt.Println("====================================")
-		fmt.Println(opsiList)
-		for i = 0; i < jumlahData; i++ {
-			fmt.Println("====================================")
-			fmt.Printf("Judul Aset  : %s\n", koleksiNFT[i].judulAset)
-			fmt.Printf("Creator     : %s\n", koleksiNFT[i].namaCreator)
-			fmt.Printf("Blockchain  : %s\n", koleksiNFT[i].blockChain)
-			fmt.Printf("Status      : %s\n", koleksiNFT[i].status)
+		fmt.Printf("Judul Aset  : %s\n", koleksiNFT[i].judulAset)
+		fmt.Printf("Creator     : %s\n", koleksiNFT[i].namaCreator)
+		fmt.Printf("Blockchain  : %s\n", koleksiNFT[i].blockChain)
+		fmt.Printf("Status      : %s\n", koleksiNFT[i].status)
 
-			t := koleksiNFT[i].tanggalBeli
-			fmt.Printf("Tanggal Beli: %02d-%02d-%04d\n", t%100, (t/100)%100, t/10000)
+		t = koleksiNFT[i].tanggalBeli
+		fmt.Printf("Tanggal Beli: %02d-%02d-%04d\n", t%100, (t/100)%100, t/10000)
 
-			fmt.Printf("Nilai       : Rp. %.2f\n", koleksiNFT[i].nilai)
-			fmt.Printf("Rarity      : %s\n", koleksiNFT[i].rarity)
-		}
+		fmt.Printf("Nilai       : Rp. %.2f\n", koleksiNFT[i].nilai)
+		fmt.Printf("Rarity      : %s\n", koleksiNFT[i].rarity)
 	}
 }
 
@@ -157,6 +161,7 @@ func lihatTotalAset(koleksiNFT koleksi, totalNilaiAset *float64) {
 	}
 }
 
+//Menerapkan Linear Search
 func hapusAset(koleksiNFT *koleksi) {
 	var judulCari string
 	var index, i int
