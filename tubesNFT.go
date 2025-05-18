@@ -113,16 +113,22 @@ func lihatAsetList(koleksiNFT koleksi) {
 		fmt.Println("------------------------------------")
 		fmt.Print("Pilihan anda: ")
 		fmt.Scan(&pilihan)
+		fmt.Println("------------------------------------")
 
 		switch pilihan {
 		case 1:
-			SelectionSortDescending(&koleksiNFT, jumlahData)
+			SelectionSortNilaiDescending(&koleksiNFT, jumlahData)
 			fmt.Println("Aset diurutkan berdasarkan nilai termahal")
 			tampilanAset(koleksiNFT)
 		case 2:
-			InsertionSortAscending(&koleksiNFT, jumlahData)
+			InsertionSortTanggalAscending(&koleksiNFT, jumlahData)
 			fmt.Println("Aset diurutkan berdasarkan tanggal beli awal")
 			tampilanAset(koleksiNFT)
+		case 3:
+			var rarity string
+			fmt.Print("Masukkan rarity yang ingin dicari (Common/Rare/Epic/Legendary): ")
+			fmt.Scan(&rarity)
+			cariAsetBerdasarkanRarity(koleksiNFT, rarity)
 		default:
 			fmt.Println("Opsi tidak valid. Silahkan input ulang lagi.")
 		}
@@ -196,7 +202,7 @@ func hapusAset(koleksiNFT *koleksi) {
 }
 
 //Mengurutkan(Descending) berdasarkan nilai aset
-func SelectionSortDescending(koleksiNFT *koleksi, N int) {
+func SelectionSortNilaiDescending(koleksiNFT *koleksi, N int) {
 	var i, idx, pass int
 	var temp nft
 
@@ -221,7 +227,7 @@ func SelectionSortDescending(koleksiNFT *koleksi, N int) {
 }
 
 //Mengurutkan(Ascending) berdasarkan tanggal aset
-func InsertionSortAscending(koleksiNFT *koleksi, N int) {
+func InsertionSortTanggalAscending(koleksiNFT *koleksi, N int) {
 	var i, pass int
 	var temp nft
 
@@ -237,3 +243,30 @@ func InsertionSortAscending(koleksiNFT *koleksi, N int) {
 		pass = pass + 1
 	}
 }
+
+//Penerapan binary search untuk mencari data berdasarkan judul aset
+func 
+
+//Penerapan linier search untuk list seluruh aset pada kasus rarity
+func cariAsetBerdasarkanRarity(koleksiNFT koleksi, rarity string) {
+	var ditemukan bool
+	var i int
+	for i = 0; i < jumlahData; i++ {
+		if koleksiNFT[i].rarity == rarity {
+			ditemukan = true
+			t := koleksiNFT[i].tanggalBeli
+			fmt.Println("====================================")
+			fmt.Printf("Judul Aset  : %s\n", koleksiNFT[i].judulAset)
+			fmt.Printf("Creator     : %s\n", koleksiNFT[i].namaCreator)
+			fmt.Printf("Blockchain  : %s\n", koleksiNFT[i].blockChain)
+			fmt.Printf("Status      : %s\n", koleksiNFT[i].status)
+			fmt.Printf("Tanggal Beli: %02d-%02d-%04d\n", t%100, (t/100)%100, t/10000)
+			fmt.Printf("Nilai       : Rp. %.2f\n", koleksiNFT[i].nilai)
+			fmt.Printf("Rarity      : %s\n", koleksiNFT[i].rarity)
+		}
+	}
+	if !ditemukan {
+		fmt.Printf("Tidak ditemukan aset dengan rarity: %s\n", rarity)
+	}
+}
+
