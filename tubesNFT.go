@@ -18,7 +18,7 @@ func main() {
 	var koleksiNFT koleksi
 	var totalNilaiAset float64
 	var opsi int
-	for opsi != 6 {
+	for opsi != 5 {
 		menuAwal()
 		opsi = pilihOpsi(opsi)
 
@@ -32,9 +32,6 @@ func main() {
 		case 4:
 			hapusAset(&koleksiNFT)
 		case 5:
-			SelectionSortDescending(&koleksiNFT, jumlahData)
-			lihatAsetList(koleksiNFT)
-		case 6:
 			fmt.Println("   Terima kasih telah menggunakan aplikasi ini. Sampai jumpa kembali!")
 		default:
 			fmt.Println("   Opsi tidak valid. Silahkan input ulang lagi.")
@@ -50,8 +47,7 @@ func menuAwal() {
 	fmt.Println("   2. Lihat Aset")
 	fmt.Println("   3. Lihat Total Aset")
 	fmt.Println("   4. Hapus aset")
-	fmt.Println("   5. Urutan Aset dari yang paling mahal")
-	fmt.Println("   6. Keluar")
+	fmt.Println("   5. Keluar")
 	fmt.Println("------------------------------------")
 }
 
@@ -104,13 +100,33 @@ func tentukanRarity(nilai float64) string {
 }
 
 func lihatAsetList(koleksiNFT koleksi) {
-	var i int
+	var i, pilihan int
+	var opsiList string
 	if jumlahData == 0 {
 		fmt.Println("Maaf anda belum memiliki aset dalam koleksi.")
 		fmt.Println("Silahkan tambahkan aset terlebih dahulu!")
 	} else {
+		fmt.Println("   Pilih cara menampilkan aset")
+		fmt.Println("------------------------------------")
+		fmt.Println("   1. Tampilkan berdasarkan nilai (termahal ke termurah)")
+		fmt.Println("   2. Tampilkan berdasarkan tanggal beli (terlama ke terbaru)")
+		fmt.Println("------------------------------------")
+		fmt.Print("Pilihan anda: ")
+		fmt.Scan(&pilihan)
+
+		switch pilihan {
+		case 1:
+			SelectionSortDescending(&koleksiNFT, jumlahData)
+			opsiList = "Aset diurutkan berdasarkan nilai termahal"
+		case 2:
+			InsertionSortAscending(&koleksiNFT, jumlahData)
+			opsiList = "Aset diurutkan berdasarkan tanggal beli awal"
+		default:
+			fmt.Println("Opsi tidak valid. Silahkan input ulang lagi.")
+		}
+
 		fmt.Println("====================================")
-		fmt.Println("List Aset yang anda miliki saat ini:")
+		fmt.Println(opsiList)
 		for i = 0; i < jumlahData; i++ {
 			fmt.Println("====================================")
 			fmt.Printf("Judul Aset  : %s\n", koleksiNFT[i].judulAset)
@@ -201,17 +217,18 @@ func SelectionSortDescending(koleksiNFT *koleksi, N int) {
 
 //Mengurutkan(Ascending) berdasarkan tanggal aset
 func InsertionSortAscending(koleksiNFT *koleksi, N int) {
-	var i, pass, temp int
+	var i, pass int
+	var temp nft
 
 	pass = 1
-	for pass <= N-1 {
+	for pass < N-1 {
 		i = pass
-		temp = koleksiNFT[pass].tanggalBeli
-		for i > 0 && temp < koleksiNFT[i-1].tanggalBeli {
+		temp = koleksiNFT[pass]
+		for i > 0 && temp.tanggalBeli < koleksiNFT[i-1].tanggalBeli {
 			koleksiNFT[i] = koleksiNFT[i-1]
 			i = i - 1
 		}
-		koleksiNFT[i].tanggalBeli = temp
+		koleksiNFT[i] = temp
 		pass = pass + 1
 	}
 }
