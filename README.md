@@ -18,14 +18,14 @@
 ## Instalasi
 Untuk menjalankan proyek ini secara lokal, ikuti langkah-langkah berikut:
 
-1. **Clone repositori ini**:
-    ```bash
-    git clone 
-    cd 
-    ```
+**Clone repositori ini**:
+ ```bash
+ git clone https://github.com/nississy/Application-CLI-Portfolio-NFT.git
+ cd Application-CLI-Portfolio-NFT
+ ```
 
 ## Cara Penggunaan
 Setelah menginstal semua dependensi, Anda dapat menjalankan program dengan perintah berikut:
 ```bash
-go run 
+go run tubes.go
 ```
