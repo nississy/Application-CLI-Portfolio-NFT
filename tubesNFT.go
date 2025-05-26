@@ -17,8 +17,45 @@ var jumlahData int
 func main() {
 	var koleksiNFT koleksi
 	var totalNilaiAset float64
-	var opsi int
-	for opsi != 5 {
+	var opsi, i int
+	var emailA, usernameA, passwordA string
+	var status bool
+
+	fmt.Println("==================================================")
+	fmt.Println("== Selamat datang di Aplikasi CLI Portfolio NFT ==")
+	fmt.Println("==================================================")
+	fmt.Println("Silahkan untuk membuat akun terlebih dahulu")
+	fmt.Println("Masukkan email")
+	fmt.Print(">> ")
+	fmt.Scan(&emailA)
+	fmt.Println("Masukkan username")
+	fmt.Print(">> ")
+	fmt.Scan(&usernameA)
+	fmt.Println("Masukkan password")
+	fmt.Print(">> ")
+	fmt.Scan(&passwordA)
+	fmt.Println("")
+	fmt.Println("Selamat anda telah berhasil membuat akun!")
+	fmt.Println("Silahkan login untuk dapat menggunakan aplikasi")
+	fmt.Println("")
+
+	for i < 3 && status == false {
+		status = login(usernameA, passwordA)
+		if status == false {
+			fmt.Println("Maaf data yang anda input salah")
+			fmt.Println("")
+			i++
+		} else {
+			fmt.Println("Anda berhasil login!")
+		}
+	}
+
+	if status == false {
+		fmt.Println("Anda telah melebihi kesempatan untuk login")
+		fmt.Println("Aplikasi akan tutup secara otomatis")
+	}
+
+	for opsi != 5 && status == true {
 		menuAwal()
 		opsi = pilihOpsi(opsi)
 
@@ -37,6 +74,23 @@ func main() {
 			fmt.Println("   Opsi tidak valid. Silahkan input ulang lagi.")
 		}
 	}
+}
+
+func login(username, pass string) bool {
+	var usernameB, passwordB string
+
+	fmt.Println("=====[LOGIN APLIKASI]=====")
+	fmt.Println("Masukkan username anda")
+	fmt.Print(">> ")
+	fmt.Scan(&usernameB)
+	fmt.Println("Masukkan password anda")
+	fmt.Print(">> ")
+	fmt.Scan(&passwordB)
+
+	if username == usernameB && pass == passwordB {
+		return true
+	}
+	return false
 }
 
 func menuAwal() {
