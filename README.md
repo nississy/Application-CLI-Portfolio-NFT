@@ -28,3 +28,9 @@ cd Application-CLI-Portfolio-NFT
 ```bash
 go run tubes.go
 ```
+
+## Authors
+Project ini dibuat secara berkelompok oleh 2 anggota yang berkontribusi:
+
+- [@nisissy](https://github.com/nississy) - Anisah Pulungan
+- [@semmyssn](https://github.com/semmyssn) - Samuel Eka Mulya
