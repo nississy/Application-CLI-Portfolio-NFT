@@ -21,23 +21,7 @@ func main() {
 	var emailA, usernameA, passwordA string
 	var status bool
 
-	fmt.Println("==================================================")
-	fmt.Println("== Selamat datang di Aplikasi CLI Portfolio NFT ==")
-	fmt.Println("==================================================")
-	fmt.Println("Silahkan untuk membuat akun terlebih dahulu")
-	fmt.Println("Masukkan email")
-	fmt.Print(">> ")
-	fmt.Scan(&emailA)
-	fmt.Println("Masukkan username")
-	fmt.Print(">> ")
-	fmt.Scan(&usernameA)
-	fmt.Println("Masukkan password")
-	fmt.Print(">> ")
-	fmt.Scan(&passwordA)
-	fmt.Println("")
-	fmt.Println("Selamat anda telah berhasil membuat akun!")
-	fmt.Println("Silahkan login untuk dapat menggunakan aplikasi")
-	fmt.Println("")
+	registerAkun(&emailA, &usernameA, &passwordA)
 
 	for i < 3 && status == false {
 		status = login(usernameA, passwordA)
@@ -76,6 +60,28 @@ func main() {
 	}
 }
 
+//Fitur awal untuk register akun sebelum login
+func registerAkun(emailA, usernameA, passwordA *string) {
+	fmt.Println("==================================================")
+	fmt.Println("== Selamat datang di Aplikasi CLI Portfolio NFT ==")
+	fmt.Println("==================================================")
+	fmt.Println("Silahkan untuk membuat akun terlebih dahulu")
+	fmt.Println("Masukkan email")
+	fmt.Print(">> ")
+	fmt.Scan(emailA)
+	fmt.Println("Masukkan username")
+	fmt.Print(">> ")
+	fmt.Scan(usernameA)
+	fmt.Println("Masukkan password")
+	fmt.Print(">> ")
+	fmt.Scan(passwordA)
+	fmt.Println("")
+	fmt.Println("Selamat anda telah berhasil membuat akun!")
+	fmt.Println("Silahkan login untuk dapat menggunakan aplikasi")
+	fmt.Println("")
+}
+
+//Fitur untuk login aplikasi
 func login(username, pass string) bool {
 	var usernameB, passwordB string
 
