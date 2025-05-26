@@ -5,8 +5,7 @@
 
 - Proyek ini guna untuk memenuhi tugas besar mata kuliah Algoritma Pemrograman 2, yang di mana project ini juga membantu kami memahami struktur fundamental pengunaan dalam ```GO```, seperti penerapan function, prosedur, arrays, searching, dan sorting dalam sebuah program, serta mengimplementasikan algoritma dan struktur data yang telah dipelajari selama perkuliahan dalam sebuah program.
 - Project ini dibuat secara berkelompok oleh Samuel Eka Mulya dan Anisah Pulungan (2 anggota).
-
-### (Project ini dibuat seluruhnya dengan GO Language)
+- Project ini dibuat seluruhnya dengan GO Language
 
 ## Fitur
 - **Pengolahan Data**: Implementasi berbagai algoritma untuk pengolahan data.
