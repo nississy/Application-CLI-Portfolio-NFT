@@ -8,7 +8,7 @@
 
 ### (Project ini dibuat seluruhnya dengan GO Language)
 
-## Fitur 📝
+## Fitur
 - **Pengolahan Data**: Implementasi berbagai algoritma untuk pengolahan data.
 - **Antarmuka Pengguna**: Antarmuka pengguna menggunakan CLI sederhana.
 - **Role**: Projek ini memiliki 1 role yaitu sebagai pengguna aplikasi.
